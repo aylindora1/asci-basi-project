@@ -1,0 +1,27 @@
+.head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: white;
+    height: 175px;
+    margin: 0;
+    box-shadow: 0 3px 150px rgb(0 0 0 / 0.2);
+
+    border-bottom: 3px solid #17291f; /* green line */
+    border-top: 3px solid #17291f; /* green line */
+   
+ 
+}
+
+.head > h1 {
+    font-family: 'Playball', cursive;
+    font-weight: 100;
+    color: black;
+    font-size:4rem;
+    
+}
+.head > img{
+    width: 150px;
+    margin: 30px;
+}
