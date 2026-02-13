@@ -1,12 +1,17 @@
 import React from "react"
+import { getRecipeFromMistral } from "../ai"
+import ClaudeRecipe from "./ClaudeRecipe"
+import IngredientsList from "./IngredientsList"
 
 export default function Main() {
 
     const [ingredients, setIngredients] = React.useState([])
+    const [recipe, setRecipe] = React.useState("")
 
-    const ingredientsListItems = ingredients.map(
-        (ingredient) => <li key={ingredient}>{ingredient}</li>
-    )
+    async function getRecipe() {
+        const recipeMarkdown = await getRecipeFromMistral(ingredients)
+        setRecipe(recipeMarkdown)
+    }
 
     function addIngredient(formData) {
         const newIngredient = formData.get("ingredient")
@@ -25,17 +30,14 @@ export default function Main() {
                 />
                 <button>Malzeme ekle</button>
             </form>
-            {ingredients.length > 0 && <section className="malzemeler">
-                <h2>Elinizdeki malzemeler:</h2>
-                <ul className="ingredients-list" aria-live="polite">{ingredientsListItems}</ul>
-                {ingredients.length > 3 && <div className="get-recipe-container">
-                    <div>
-                        <h3>Tarif için hazır mısınız?</h3>
-                        <p>Malzeme listenize göre bir tarif oluşturun.</p>
-                    </div>
-                    <button>Tarif oluştur</button>
-                </div>}
-            </section>}
+            {ingredients.length > 0 &&
+                <IngredientsList
+                    ingredients={ingredients}
+                    getRecipe={getRecipe}
+                />
+            }
+
+            {recipe && <ClaudeRecipe recipe={recipe} />}
         </main>        
     )
 }

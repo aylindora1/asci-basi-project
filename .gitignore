@@ -4,6 +4,9 @@ node_modules/
 # Environment files
 .env
 .env.*
+frontend/.env
+frontend/.env*
+frontend/ai.js
 backend/.env
 backend/.env.*
 
